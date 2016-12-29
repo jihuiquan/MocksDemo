@@ -48,8 +48,7 @@ public class NewsContentFragment extends Fragment implements NewsContract.View{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news_item, container, false);
-        itemBinding = DataBindingUtil.bind(view);
+        itemBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_news_item, container, false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         newsAdapter = new NewsAdapter();
         itemBinding.rvContent.setLayoutManager(linearLayoutManager);
@@ -57,7 +56,7 @@ public class NewsContentFragment extends Fragment implements NewsContract.View{
         newsPresenter = new NewsPresenter(new NewsDataSourceImpl(), this);
         newsPresenter.loadData(type);
         initEvent();
-        return view;
+        return itemBinding.getRoot();
     }
 
 

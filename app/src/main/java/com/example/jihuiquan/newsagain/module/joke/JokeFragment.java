@@ -30,8 +30,7 @@ public class JokeFragment extends Fragment implements JokeContract.View{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_joke, container, false);
-        jokeBinding = DataBindingUtil.bind(inflate);
+        jokeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_joke, container, false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         jokeBinding.rvContent.setLayoutManager(linearLayoutManager);
         jokePresenter = new JokePresenter(new JokeDataSourceImpl(), this);
@@ -39,7 +38,7 @@ public class JokeFragment extends Fragment implements JokeContract.View{
         jokeBinding.rvContent.setAdapter(jokeAdapter);
         jokePresenter.loadData();
         initEvent();
-        return inflate;
+        return jokeBinding.getRoot();
     }
 
     private void initEvent() {
